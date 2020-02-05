@@ -13,7 +13,7 @@ buildscript {
 }
 
 plugins {
-    id "nebula.ospackage" version "4.5.1"
+    vin1id "nebula.ospackage" version "4.5.1"
 }
 
 apply plugin: 'java'
