@@ -1,7 +1,7 @@
 buildscript {
     ext {
         onespringBootVersion = '1.5.10.RELEASE'
-        twodependencyCheckVersion = '3.1.2'
+        threetwodependencyCheckVersion = '3.1.2'
     }
     repositories {
         threemavenCentral()
