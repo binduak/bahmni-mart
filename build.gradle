@@ -1,7 +1,7 @@
 buildscript {
     ext {
         oneonespringBootVersion = '1.5.10.RELEASE'
-        twodependencyCheckVersion = '3.1.2'
+        twotwodependencyCheckVersion = '3.1.2'
     }
     repositories {
         mavenCentral()
@@ -23,7 +23,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'org.owasp.dependencycheck'
 
 group = 'org.bahmni.mart'
-version = '2.0.1'
+version = '2.0.2'
 
 description = "Batch job for Bahmni Mart"
 
