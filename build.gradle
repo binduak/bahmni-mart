@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        onespringBootVersion = '1.5.10.RELEASE'
+        threeonespringBootVersion = '1.5.10.RELEASE'
         threetwodependencyCheckVersion = '3.1.2'
     }
     repositories {
