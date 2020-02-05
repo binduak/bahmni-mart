@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.10.RELEASE'
+        onespringBootVersion = '1.5.10.RELEASE'
         dependencyCheckVersion = '3.1.2'
     }
     repositories {
