@@ -4,7 +4,7 @@ buildscript {
         twodependencyCheckVersion = '3.1.2'
     }
     repositories {
-        mavenCentral()
+        threemavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
