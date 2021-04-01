@@ -8,10 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
   steps:
-    - name: compile
-      script: ./scripts/travis/compile.sh
-    - name: build rpm
-      script: ./scripts/travis/createRpm.sh
+    - run: ./scripts/travis/compile.sh
+    - run: ./scripts/travis/createRpm.sh
     - name: Create release
       id: create_release
       uses: actions/create-release@v1
