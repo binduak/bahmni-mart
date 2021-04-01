@@ -10,8 +10,9 @@ jobs:
   steps:
     - name: compile
       script: ./scripts/travis/compile.sh
-    - name: Create release
+    - name: build rpm
       script: ./scripts/travis/createRpm.sh
+    - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
