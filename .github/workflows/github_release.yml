@@ -38,7 +38,7 @@ jobs:
           asset_name: bahmni-mart.rpm
           asset_content_type: application/x-rpm
       - name: Publish release
-        uses: binduak/bahmni-mart@master
+        uses: binduak/bahmni-mart@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
