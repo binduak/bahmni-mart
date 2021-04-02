@@ -1,27 +1,26 @@
-name: Create Release
-
 on:
   push:
-    branches: [ master ]
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+name: Create Release
 
 jobs:
   build:
-
+    name: Create Release
     runs-on: ubuntu-latest
-
     steps:
-      - name: chckout code
+      - name: Checkout code
         uses: actions/checkout@v2
-      - run: ./scripts/travis/compile.sh
-      - run: ./scripts/travis/createRpm.sh
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: v1
-          release_name: Release v1
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           body: |
             Changes in this Release
             - First Change
@@ -34,14 +33,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/distributions/
-          asset_name: bahmni-mart.rpm
-          asset_content_type: application/x-rpm
+          asset_path: ./build.gradle
+          asset_name: build.gradle
+          asset_content_type: file
       - name: Publish release
         uses: binduak/bahmni-mart@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           id: ${{ steps.create_release.outputs.id }}
-
-
