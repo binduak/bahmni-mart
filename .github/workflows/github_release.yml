@@ -12,8 +12,6 @@ jobs:
     services:
       postgres:
         image: postgres
-        env:
-          POSTGRES_PASSWORD: password
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -31,14 +29,32 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - name: chckout code
+      - name: Verify MySQL connection from container
+        run: |
+            apt-get update
+            apt-get install -y mysql-client
+            mysql --host 127.0.0.1 --port 3306 -e "use mysql; SET PASSWORD FOR 'root'@'localhost' = PASSWORD('password');FLUSH PRIVILEGES;"
+            mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES"
+            mysql -uroot -ppassword -e "create database test_openmrs;"
+            mysql -uroot -ppassword -e "CREATE USER 'test_user'@'localhost' IDENTIFIED BY 'password';"
+            sudo service mysql restart
+      - name: Verify psql conncetion from container
+        run: |
+          apt-get update
+          apt-get install --yes --no-install-recommends postgresql-client
+          - run: |
+          psql -h 127.0.0.1  -U postgres -c "CREATE USER test_user WITH PASSWORD 'password' NOCREATEROLE SUPERUSER;"
+          psql -h 127.0.0.1  -U postgres -c "CREATE DATABASE test_analytics WITH OWNER test_user;"
+          psql -h 127.0.0.1  -U test_user test_analytics -c "CREATE SCHEMA bahmni_mart_scdf;"
+          sudo service postgresql restart
+
+      - name: checkout code
         uses: actions/checkout@v2
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
             java-version: 1.8
       - run: ./scripts/travis/compile.sh
-      - run: ./scripts/travis/createDb.sh
       - run: ./scripts/travis/test.sh
       - run: ./scripts/travis/createRpm.sh
 
