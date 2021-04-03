@@ -38,7 +38,6 @@ jobs:
             mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES"
             mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "create database test_openmrs;"
             mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "CREATE USER 'test_user'@'localhost' IDENTIFIED BY 'password';"
-            service mysql restart
       - name: Verify psql conncetion from container
         run: |
           sudo apt-get update
@@ -46,9 +45,7 @@ jobs:
           - run: |
           psql -h 127.0.0.1  -U postgres -p password -c "CREATE USER test_user WITH PASSWORD 'password' NOCREATEROLE SUPERUSER;"
           psql -h 127.0.0.1  -U postgres -p password -c "CREATE DATABASE test_analytics WITH OWNER test_user;"
-          psql -h 127.0.0.1  -U test_user test_analytics -c "CREATE SCHEMA bahmni_mart_scdf;"
-          service postgresql restart
-
+          psql -h 127.0.0.1  -U test_user test_analytics -c "CREATE SCHEMA bahmni_mart_scdf;
 
       - name: chckout code
         uses: actions/checkout@v2
