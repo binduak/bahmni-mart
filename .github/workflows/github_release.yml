@@ -38,7 +38,7 @@ jobs:
             mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "SHOW DATABASES"
             mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "create database test_openmrs;"
             mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "CREATE USER 'test_user'@'127.0.0.1' IDENTIFIED BY 'password';"
-            mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "GRANT ALL PRIVILEGES ON *.* TO 'test-user'@'%' IDENTIFIED by 'password';"
+            mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "GRANT ALL PRIVILEGES ON *.* TO 'test_user'@'%' IDENTIFIED by 'password';"
             mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "FLUSH PRIVILEGES;"
 
 
