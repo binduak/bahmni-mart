@@ -12,6 +12,8 @@ jobs:
     services:
       postgres:
         image: postgres
+        env:
+          POSTGRES_PASSWORD: password
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -43,12 +45,13 @@ jobs:
           apt-get update
           apt-get install --yes --no-install-recommends postgresql-client
           - run: |
-          psql -h 127.0.0.1  -U postgres -c "CREATE USER test_user WITH PASSWORD 'password' NOCREATEROLE SUPERUSER;"
-          psql -h 127.0.0.1  -U postgres -c "CREATE DATABASE test_analytics WITH OWNER test_user;"
+          psql -h 127.0.0.1  -U postgres -p password -c "CREATE USER test_user WITH PASSWORD 'password' NOCREATEROLE SUPERUSER;"
+          psql -h 127.0.0.1  -U postgres -p password -c "CREATE DATABASE test_analytics WITH OWNER test_user;"
           psql -h 127.0.0.1  -U test_user test_analytics -c "CREATE SCHEMA bahmni_mart_scdf;"
           sudo service postgresql restart
 
-      - name: checkout code
+
+      - name: chckout code
         uses: actions/checkout@v2
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
