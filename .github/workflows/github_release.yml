@@ -43,8 +43,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends postgresql-client
           - run: |
-          psql -h 127.0.0.1 --port 5432 -U postgres -c "CREATE USER test_user WITH PASSWORD 'password' NOCREATEROLE SUPERUSER;"
-          psql -h 127.0.0.1 --port 5432 -U postgres -ppassword -c "CREATE DATABASE test_analytics WITH OWNER test_user;"
+          PGPASSWORD=password psql -h 127.0.0.1 --port 5432 -U postgres -c "CREATE USER test_user WITH PASSWORD 'password' NOCREATEROLE SUPERUSER;"
+          PGPASSWORD=password psql -h 127.0.0.1 --port 5432 -U postgres -c "CREATE DATABASE test_analytics WITH OWNER test_user;"
           psql -h 127.0.0.1 --port 5432 -U test_user test_analytics -c "CREATE SCHEMA bahmni_mart_scdf;
 
       - name: chckout code
