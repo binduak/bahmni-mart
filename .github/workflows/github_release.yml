@@ -60,5 +60,6 @@ jobs:
       - run: ./scripts/travis/compile.sh
       - run: ./scripts/travis/test.sh
       - run: ./scripts/travis/createRpm.sh
+      - run: ./scripts/github-release.sh binduak ${{secrets.GH_TOEKN}}
 
 
