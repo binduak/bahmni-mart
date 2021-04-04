@@ -9,6 +9,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+        python-version: 2.7
+
     services:
       postgres:
         image: postgres
@@ -31,6 +34,10 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
+      - name: Set up Python ${{ python-version }}
+        uses: actions/setup-python@v2
+        with:
+            python-version: ${{ python-version }}
       - name: Verify MySQL connection from container
         run: |
             sudo apt-get update
