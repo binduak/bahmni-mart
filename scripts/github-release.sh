@@ -46,6 +46,7 @@ main(){
     local commit_sha=$(git rev-parse HEAD)
 
     CREATE_RESPONSE=$(create_release "$token" "$release_name" "$commit_sha" "$repo_owner");
+    echo $CREATE_RESPONSE
     local release_id=$(echo $CREATE_RESPONSE | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["id"]');
     echo "Created a release with id $release_id"
     echo "Created Response ******************************"
