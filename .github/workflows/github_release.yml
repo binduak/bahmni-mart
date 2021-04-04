@@ -70,7 +70,7 @@ jobs:
       - run: ./scripts/travis/createRpm.sh
       - shell: bash
         env:
-          TOKEN: ${{ secrets.GT_TOEKN }}
+          TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           ./scripts/github-release.sh binduak "$TOKEN"
 

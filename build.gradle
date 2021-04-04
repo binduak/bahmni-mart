@@ -23,7 +23,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'org.owasp.dependencycheck'
 
 group = 'org.bahmni.mart'
-version = '2.1.3'
+version = '2.1.4'
 
 description = "Batch job for Bahmni Mart"
 
