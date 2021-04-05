@@ -37,7 +37,7 @@ upload_asset() {
 main(){
   # Assign global variables to local variables
     local repo_owner=${args[0]}
-    local token=${args[1]};
+    local token=$GH_AUTH_TOKEN;
     local release_name=$(read_version)
     local name="bahmni-mart-${release_name}.noarch.rpm";
     local file="$(pwd)/build/distributions/$name";
