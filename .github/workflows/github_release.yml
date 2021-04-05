@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
             python-version: ${{ matrix.python-version }}
-      - name: Verify MySQL connection from container
+      - name: Create test_openmrs mysql database
         run: |
             sudo apt-get update
             sudo apt-get install -y mysql-client
@@ -50,7 +50,7 @@ jobs:
             mysql --host 127.0.0.1 --port 3306 -uroot -ppassword -e "FLUSH PRIVILEGES;"
 
 
-      - name: Verify psql conncetion from container
+      - name: Create test_analytics postgres database
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends postgresql-client
